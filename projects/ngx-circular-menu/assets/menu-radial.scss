@@ -1,0 +1,150 @@
+/**
+* menu-radial.scss
+* Global styles used for the radial menu used in the application.  
+*/
+
+/* Initial state*/
+$colorBgFab: #1976d2 !default;
+$colorFontFab: #FFF !default;
+$colorBgFabExpanded: #FFF !default;
+$colorFontFabExpanded: #1976d2 !default;
+$colorBgFabMenu: #1976d2 !default;
+$colorFontFabMenu: #FFF !default;
+
+.radial-menu {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+
+  .floating-btn {
+    display: block;
+    width: 4.5em;
+    height: 4.5em;
+    border-radius: 50%;
+    background-color: $colorBgFab;
+    box-shadow: 0 2px 5px 0 hsla(0, 0%, 0%, .26);  
+    color: $colorFontFab;
+    text-align: center;
+    // line-height: 3.9;
+    cursor: pointer;
+    outline: 0;
+    
+
+    i {
+        font-size: 1.3em;
+        transition: transform .2s;  
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -moz-transform: translateX(-50%) translateY(-50%);
+        -webkit-transform: translateX(-50%) translateY(-50%);
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    &:active{
+        box-shadow: 0 4px 8px 0 hsla(0, 0%, 0%, .4);
+    }
+
+    }
+
+    .items-wrapper {
+        padding: 0;
+        margin: 0;
+    }
+
+    .fab-menu-item {
+        position: absolute;
+        top: .2em;
+        z-index: -1;
+        display: block;
+        text-decoration: none;
+        color: $colorFontFabMenu;
+        font-size: 1em;
+        text-align: center;
+        opacity:0.8;
+        transition: transform .3s ease, background .2s ease; 
+        line-height: 1;
+
+        img {
+          height: 24px;
+          width: 24px;
+        }
+        span {
+          font-size: 0.8em;
+          // display: inline-flex;
+          display: block;
+          padding-top: 0.5em;
+        }
+
+        &:hover{
+          opacity:1;
+        } 
+    }
+}
+
+.radial-menu.active {
+    .floating-btn {
+        box-shadow: inset 0 0 3px hsla(0, 0%, 0%, .3);
+        background-color: $colorBgFabExpanded;
+        color: $colorFontFabExpanded;
+
+        i {
+            transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+        }
+    }
+
+    /* Positions for two menu items */
+    .two-menu{
+      .fab-menu-item {
+        transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        &:nth-child(1){
+          transform: translate3d(-1em, -7em, 0);
+        }
+        &:nth-child(2){
+          transform: translate3d(-6.5em, -1em, 0);
+        }
+      }
+    }
+
+    /* Positions for four menu items */
+    .four-menu{
+      .fab-menu-item {
+        transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        &:nth-child(1){
+          transform: translate3d(1em, -8.5em, 0);
+        }
+        &:nth-child(2){
+          transform: translate3d(-3.5em, -7em, 0);
+        }
+        &:nth-child(3){
+          transform: translate3d(-7em, -3.2em, 0);
+        }
+        &:nth-child(4){
+          transform: translate3d(-6em, 1em, 0);
+        }
+      }
+    }
+}
+
+
+
+.radial-menu:after {
+  display: block;
+  content: ' ';
+  width: 4.5em;
+  height: 4.5em;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -2;
+  background-color: $colorBgFabMenu;
+  transition: all .3s ease;
+}
+
+.radial-menu.active:after {
+  transform: scale3d(5.5, 5.5, 1);
+  transition-timing-function: cubic-bezier(.68, 1.55, .265, 1);
+}
